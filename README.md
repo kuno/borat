@@ -1,3 +1,17 @@
+# Borat Bot
+To start the bot be sure to set env variables
+    
+    export HUBOT_AUTH_ADMIN=hubotpassword
+    export HUBOT_XMPP_USERNAME=hubot@location.whatever
+    export HUBOT_XMPP_PASSWORD=hubots_login_password
+    export HUBOT_XMPP_ROOMS=room@location.whatever,room2@location.whatever
+    exprot HUBOT_XMPP_HOST=location.whatever
+    export HUBOT_XMPP_PORT=(include port here if needed)
+
+    export HUBOT_NAME=nameForHubot
+    export HUBOT_ALIAS=aliasForHubot
+
+
 # Hubot
 
 This is a version of GitHub's Campfire bot, hubot. He's pretty cool.
