@@ -5,7 +5,7 @@ To start the bot be sure to set env variables
     export HUBOT_AUTH_ADMIN=hubotpassword
     export HUBOT_NAME=nameForHubot
     export HUBOT_ALIAS=aliasForHubot
-    
+
     Required:
     export HUBOT_XMPP_USERNAME=hubot@location.whatever
     export HUBOT_XMPP_PASSWORD=hubots_login_password
@@ -14,6 +14,98 @@ To start the bot be sure to set env variables
     export HUBOT_XMPP_PORT=(include port here if needed)
 
 See [markstory/hubot-xmpp](https://github.com/markstory/hubot-xmpp) for full documentation of the XMPP adapter.
+
+
+### What's Working? What's Not?
+Note: Text inside ( here ) can be ommited.
+
+
+- `borat help`
+
+Borat will list off all availible commands.
+
+
+- `User/Repo#1`
+
+Returns a link to an Issue within a user/orgs repo.
+
+
+- `brb`
+
+Lets Borat know you're away, he'll welcome you back when you come back :D
+
+
+- `hi borat` or `hey borat`
+
+Borat will greet you. *Warning* he can be a dick about it.
+
+
+- `borat die`
+
+Kills Borat. It's ok though, we can revive him if needed.
+
+
+- `borat echo <text>`
+
+Stop repeating yourself!
+
+
+- `borat image (me) <query>`
+
+Fetch an image of your query.
+
+
+- `borat animate (me) <query>`
+
+Same as above, but tries to fetch an animated GIF.
+
+
+- `borat convert (me) <units> to <other units>`
+
+Converts values like 3cm to km or yards, stuff like that.
+
+
+- `borat map (me) <query>`
+
+Fetches a map of the area stated in your query.
+
+
+- `borat mustache (me) <url> or <query>`
+
+Add a mustache to a picture. What isn't better with a mustache?
+
+
+- `borat math (me) <expression>`
+
+Borat will do your math! Although sometimes he doesn't do it. (to be fixed!)
+
+
+- `borat time`
+
+Time for you to get a watch! Unless your happy with knowing the server time.
+
+
+- `borat the (3) rules` or `laws`
+
+Make sure that robot doesn't forget them!
+
+
+- `borat the rules for developers`
+
+We have rules too!
+
+
+- `borat youtube (me) <query>`
+
+Search for a youtube video.
+
+
+
+
+
+
+
+
 
 
 # Hubot

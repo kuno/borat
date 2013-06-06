@@ -56,6 +56,12 @@ boratQuotes = [
   "My wife is dead? \n[long pause] \nHigh five!"
 ]
 
+greetings = [
+  "Jak sie masz!",
+  "What's up, vanilla face?",
+  "Dzien dobry!"
+]
+
 module.exports = function(robot) {
   robot.hear(/very nice/i, function(msg) {
     return msg.send("High five!!")
@@ -65,8 +71,8 @@ module.exports = function(robot) {
     return msg.send("Great success!!")
   });
 
-  robot.hear(/hi borat/i, function(msg) {
-    return msg.send("What's up, vanilla face?")
+  robot.hear(/ ?(hi|hey|yo|whats up|hello|greetings) borat/i, function(msg) {
+    return msg.send(msg.random(greetings));
   })
 
   robot.respond(/quote/i, function(msg) {
