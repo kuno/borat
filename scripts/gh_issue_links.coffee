@@ -37,7 +37,8 @@ module.exports = (robot) ->
     issue_title = ""
     base_url = process.env.HUBOT_GITHUB_API || 'https://api.github.com'
     
-    github.get "#{base_url}/repos/#{bot_github_repo}/issues/" + issue_number, (issue_obj) ->
+    #                               VVVVVVV  env Variable for Username perhaps?
+    github.get "#{base_url}/repos/Wiredcraft/#{bot_github_repo}/issues/" + issue_number, (issue_obj) ->
       issue_title = issue_obj.title
       unless process.env.HUBOT_GITHUB_API
          url = "https://github.com"
