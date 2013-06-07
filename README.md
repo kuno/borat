@@ -7,105 +7,54 @@ To start the bot be sure to set env variables
     export HUBOT_ALIAS=aliasForHubot
 
     Required:
+    (XMPP)
     export HUBOT_XMPP_USERNAME=hubot@location.whatever
     export HUBOT_XMPP_PASSWORD=hubots_login_password
     export HUBOT_XMPP_ROOMS=room@location.whatever,room2@location.whatever
     exprot HUBOT_XMPP_HOST=location.whatever
     export HUBOT_XMPP_PORT=(include port here if needed)
+    
+    (GitHub)
+    export HUBOT_GITHUB_TOKEN="token in here"
 
 See [markstory/hubot-xmpp](https://github.com/markstory/hubot-xmpp) for full documentation of the XMPP adapter.
 
 
 ### What's Working? What's Not?
-Note: Text inside ( here ) can be ommited.
+Note: Text inside `(here)` can be ommited. While `borat whats (this|that)` means you can say `borat whats this` or `borat whats that` for the command to work.
 
 
-- `borat help`
+- `borat help` - Borat will list off all availible commands.
 
-Borat will list off all availible commands.
+- `Embarq#1` - Returns a link to an Issue within a repo belonging to Wiredcraft. In this case Issue 1 of Embarq.
 
+- `brb` - Lets Borat know you're away, he'll welcome you back when you come back :D
 
-- `User/Repo#1`
+- `hi borat` or `hey borat` - Borat will greet you. *Warning* he can be a dick about it.
 
-Returns a link to an Issue within a user/orgs repo.
+- `borat die` - Kills Borat. It's ok though, we can revive him if needed.
 
+- `borat echo <text>` - Stop repeating yourself!
 
-- `brb`
+- `borat image (me) <query>` - Fetch an image of your query.
 
-Lets Borat know you're away, he'll welcome you back when you come back :D
+- `borat animate (me) <query>` - Same as above, but tries to fetch an animated GIF.
 
+- `borat convert (me) <units> to <other units>` - Converts values like 3cm to km or yards, stuff like that.
 
-- `hi borat` or `hey borat`
+- `borat map (me) <query>` - Fetches a map of the area stated in your query.
 
-Borat will greet you. *Warning* he can be a dick about it.
+- `borat mustache (me) <url> or <query>` - Add a mustache to a picture. What isn't better with a mustache?
 
+- `borat math (me) <expression>` - Borat will do your math! Although sometimes he doesn't do it. (to be fixed!)
 
-- `borat die`
+- `borat time` - Time for you to get a watch! Unless your happy with knowing the server time.
 
-Kills Borat. It's ok though, we can revive him if needed.
+- `borat the (3) (rules|laws)` - Make sure that robot doesn't forget them!
 
+- `borat the rules for developers` - We have rules too!
 
-- `borat echo <text>`
-
-Stop repeating yourself!
-
-
-- `borat image (me) <query>`
-
-Fetch an image of your query.
-
-
-- `borat animate (me) <query>`
-
-Same as above, but tries to fetch an animated GIF.
-
-
-- `borat convert (me) <units> to <other units>`
-
-Converts values like 3cm to km or yards, stuff like that.
-
-
-- `borat map (me) <query>`
-
-Fetches a map of the area stated in your query.
-
-
-- `borat mustache (me) <url> or <query>`
-
-Add a mustache to a picture. What isn't better with a mustache?
-
-
-- `borat math (me) <expression>`
-
-Borat will do your math! Although sometimes he doesn't do it. (to be fixed!)
-
-
-- `borat time`
-
-Time for you to get a watch! Unless your happy with knowing the server time.
-
-
-- `borat the (3) rules` or `laws`
-
-Make sure that robot doesn't forget them!
-
-
-- `borat the rules for developers`
-
-We have rules too!
-
-
-- `borat youtube (me) <query>`
-
-Search for a youtube video.
-
-
-
-
-
-
-
-
+- `borat youtube (me) <query>` - Search for a youtube video.
 
 
 # Hubot
