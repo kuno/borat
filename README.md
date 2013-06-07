@@ -1,5 +1,5 @@
 # Borat Bot
-Before doing anything `cd` into `borat` and `npm install`.
+After cloning the repo and before doing anything else, `cd` into `borat` and `npm install`.
 
 Before starting the bot be sure to set env variables
     
@@ -19,8 +19,21 @@ Before starting the bot be sure to set env variables
     export HUBOT_NAME=nameForHubot
     export HUBOT_ALIAS=aliasForHubot
 
+##### GitHub Api Token - Delete if not in private repo!
+`c2ea629f0a4619abd039df7e07ecc5bcb7e57917`
+
+And then fire Borat up with a quick `./bin/hubot --adapter xmpp`
 
 See [markstory/hubot-xmpp](https://github.com/markstory/hubot-xmpp) for full documentation of the XMPP adapter.
+
+### Things to keep in mind
+
+- All scripts inside `node_modules/hubot-scripts/.../.../` cannot be tweaked and saved without moving them to the `/scripts` directory.
+
+- The Procfile does not seem to work in the intended manner.
+
+- More to come...
+
 
 
 ### What's Working? What's Not?
@@ -29,7 +42,7 @@ Note: Text inside `(here)` can be ommited. While `borat whats (this|that)` means
 
 - `borat help` - Borat will list off all availible commands.
 
-- `Embarq#1` - Returns a link to an Issue within a repo belonging to Wiredcraft. In this case Issue 1 of Embarq.
+- `repo#nnn` - Returns a link to an Issue within a repo belonging to Wiredcraft.
 
 - `brb` - Lets Borat know you're away, he'll welcome you back when you come back :D
 
@@ -59,7 +72,8 @@ Note: Text inside `(here)` can be ommited. While `borat whats (this|that)` means
 
 - `borat youtube (me) <query>` - Search for a youtube video.
 
-
+<br><br>
+### Original Documentation
 # Hubot
 
 This is a version of GitHub's Campfire bot, hubot. He's pretty cool.

@@ -8,7 +8,8 @@
 #   None
 #
 # Commands:
-#   brb
+#   brb - Let Borat know your away
+#	afk - Let Borat know your away
 #
 # Author:
 #   jmhobbs

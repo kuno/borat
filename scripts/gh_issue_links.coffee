@@ -12,9 +12,7 @@
 #   HUBOT_GITHUB_API
 #
 # Commands:
-#   #nnn - link to GitHub issue nnn for HUBOT_GITHUB_REPO project
-#   repo#nnn - link to GitHub issue nnn for repo project
-#   user/repo#nnn - link to GitHub issue nnn for user/repo project
+#   repo#nnn - link to GitHub issue nnn for a repo in Wiredcraft
 #
 # Notes:
 #   HUBOT_GITHUB_API allows you to set a custom URL path (for Github enterprise users)
