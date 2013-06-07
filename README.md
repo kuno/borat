@@ -1,11 +1,8 @@
 # Borat Bot
-To start the bot be sure to set env variables
-    
-    Optional:
-    export HUBOT_AUTH_ADMIN=hubotpassword
-    export HUBOT_NAME=nameForHubot
-    export HUBOT_ALIAS=aliasForHubot
+Before doing anything `cd` into `borat` and `npm install`.
 
+Before starting the bot be sure to set env variables
+    
     Required:
     (XMPP)
     export HUBOT_XMPP_USERNAME=hubot@location.whatever
@@ -16,6 +13,12 @@ To start the bot be sure to set env variables
     
     (GitHub)
     export HUBOT_GITHUB_TOKEN="token in here"
+    
+    Optional:
+    export HUBOT_AUTH_ADMIN=hubotpassword
+    export HUBOT_NAME=nameForHubot
+    export HUBOT_ALIAS=aliasForHubot
+
 
 See [markstory/hubot-xmpp](https://github.com/markstory/hubot-xmpp) for full documentation of the XMPP adapter.
 
