@@ -8,7 +8,7 @@
 //   None
 //
 // Commands:
-//   hubot <user> message <message> - sends a <message> to <user> when they log on.
+//   hubot <user> (message|m) <message> - sends a <message> to <user> when they log on.
 //
 // Author:
 //   Jamesford
@@ -19,12 +19,13 @@ messages = [];
 
 module.exports = function(robot) {
   
-  robot.respond(/(.*) message (.*)/i, function(msg) {
+  // Save a message for someone
+  robot.respond(/(.*) (message|m) (.*)/i, function(msg) {
     var from, message, to;
     to = msg.match[1];
-    message = msg.match[2];
+    message = msg.match[3];
     from = msg.message.user.name;
-    msg.reply("Got it, when " + to + " comes online I'll pass it along.");
+    msg.reply("Got it, saved message for " + to + ".");
     messages.push({
       'to': to,
       'message': message,
@@ -36,6 +37,7 @@ module.exports = function(robot) {
   });
 
 
+  // List all messages being held
   robot.respond(/list m/i, function(msg) {
     var listmessages;
     listmessages = []
@@ -51,6 +53,7 @@ module.exports = function(robot) {
   });
 
 
+  // Clear all messages being held
   robot.respond(/clear m/i, function(msg) {
     if (messages.length === 0) {
       return msg.send("Message queue empty!");
@@ -61,6 +64,7 @@ module.exports = function(robot) {
   });
 
 
+  // Check your messages
   robot.respond(/my m/i, function(response) {
     var name, mymessages;
     name = response.message.user.name;

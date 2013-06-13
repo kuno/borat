@@ -72,6 +72,18 @@ Note: Text inside `(here)` can be ommited. While `borat whats (this|that)` means
 
 - `borat youtube (me) <query>` - Search for a youtube video.
 
+- `borat <user> (message|m) <message goes here>` - Borat will hold your message for user. Message cannot start with "Message or message."
+
+- `borat list m` - List all messages in queue.
+
+- `borat my m` - Show messages sent to me.
+
+- `borat clear m` - Clear message queue.
+
+
+
+
+
 <br><br>
 ### Original Documentation
 # Hubot
