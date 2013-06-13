@@ -89,5 +89,4 @@ module.exports = function(robot) {
     	console.log(users_status);
     	return msg.send("Logged to console");
     });
-
 };

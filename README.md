@@ -8,13 +8,14 @@ Before starting the bot be sure to set env variables
     export HUBOT_XMPP_USERNAME=hubot@location.whatever
     export HUBOT_XMPP_PASSWORD=hubots_login_password
     export HUBOT_XMPP_ROOMS=room@location.whatever,room2@location.whatever
-    exprot HUBOT_XMPP_HOST=location.whatever
-    export HUBOT_XMPP_PORT=(include port here if needed)
     
     (GitHub)
     export HUBOT_GITHUB_TOKEN="token in here"
     
     Optional:
+    export HUBOT_XMPP_HOST=location.whatever
+    export HUBOT_XMPP_PORT=(include port here if needed)
+    
     export HUBOT_AUTH_ADMIN=hubotpassword
     export HUBOT_NAME=nameForHubot
     export HUBOT_ALIAS=aliasForHubot
