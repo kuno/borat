@@ -11,6 +11,7 @@
 //   hubot status <your status> - Saves your status.
 //	 hubot clear s - Deletes your status.
 //   hubot list s - List status for each user.
+//   hubot my s - Display your current status.
 //
 // Author:
 //   Jamesford
@@ -36,6 +37,18 @@ module.exports = function(robot) {
     	users_status[msg.message.user.name] = status;
     	return msg.reply("status set to: " + status);
     });
+
+    // Check my status
+    robot.respond(/my s/i, function(msg) {
+    	var mystatus;
+    	mystatus = users_status[msg.message.user.name];
+
+    	if (mystatus === undefined) {
+    		return msg.reply("no status set!")
+    	} else {
+    		return msg.reply(mystatus);
+    	}
+    })
 
     // Remove users status
     robot.respond(/clear s/i, function(msg) {
