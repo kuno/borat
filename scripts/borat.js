@@ -7,8 +7,7 @@
 //  None
 //
 // Commands:
-//  quote - Quote a line from Borat.
-//  hi borat (without hubot) - Borat greets you.
+//  hubot quote - Quote a line from Borat.
 //
 // Author:
 //   Jamesford

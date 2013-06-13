@@ -33,4 +33,3 @@ module.exports = (robot) ->
 
 	robot.hear /(brb|afk)/i, (msg) ->
 		users_away[msg.message.user.name] = true
-		console.log users_away

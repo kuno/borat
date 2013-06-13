@@ -11,4 +11,4 @@ module.exports = (robot) ->
     response.send response.message.user.name + " has joined"
 
   robot.leave (response) ->
-    response.send response.message.user.name + " has left the building."
+    response.send response.message.user.name + " has left."
