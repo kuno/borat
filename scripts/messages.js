@@ -8,7 +8,7 @@
 //   None
 //
 // Commands:
-//   hubot <user> (message|m) <message> - sends a <message> to <user> when they log on.
+//   hubot <user> message <your message> - have hubot pass on a message
 //   hubot my m - check your messages
 //
 // Author:
