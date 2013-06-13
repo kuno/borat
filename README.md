@@ -80,6 +80,15 @@ Note: Text inside `(here)` can be ommited. While `borat whats (this|that)` means
 
 - `borat clear m` - Clear message queue.
 
+- `borat status <your status>` - Set your current status.
+
+- `borat clear s` - Removes your status.
+
+- `borat list s` - Lists status for each user.
+
+
+
+
 
 
 
