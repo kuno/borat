@@ -9,6 +9,7 @@
 //
 // Commands:
 //   hubot <user> (message|m) <message> - sends a <message> to <user> when they log on.
+//   hubot my m - check your messages
 //
 // Author:
 //   Jamesford

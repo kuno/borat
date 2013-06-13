@@ -18,6 +18,16 @@
 var users_status
 users_status = {}
 
+// Check if an Object is Empty
+function isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+
+    return true;
+}
+
 module.exports = function(robot) {
 
 	// Save users status
@@ -37,11 +47,16 @@ module.exports = function(robot) {
 	robot.respond(/list s/i, function(msg) {
 		var status, user, stat_array;
 		stat_array = []
-		for (user in users_status) {
-			status = users_status[user];
-			stat_array.push(user + " - " + status)
+
+		if (isEmpty(users_status)) {
+			return msg.send("No one has set a status.")
+		} else {
+			for (user in users_status) {
+				status = users_status[user];
+				stat_array.push(user + " - " + status)
+			}
+			return msg.send("" + stat_array.join('\n'));
 		}
-		return msg.send("" + stat_array.join('\n'));
 	});
 
     // Listen for mention of user
@@ -56,10 +71,10 @@ module.exports = function(robot) {
 		}
 	});
 
-    // // Console log users_status object
-    // robot.respond(/log s/i, function(msg) {
-    // 	console.log(users_status);
-    // 	return msg.send("Logged to console");
-    // });
+    // Console log users_status object
+    robot.respond(/log s/i, function(msg) {
+    	console.log(users_status);
+    	return msg.send("Logged to console");
+    });
 
 };
