@@ -1,5 +1,6 @@
 # Borat Bot
-After cloning the repo and before doing anything else, `cd` into `borat` and `npm install`.
+
+After cloning the repo and before doing anything else, `cd` into `borat` and `npm install`. Node.js and npm are required.
 
 Before starting the bot be sure to set env variables
     
