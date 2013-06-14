@@ -5,7 +5,7 @@ cd /opt/borat
 
 export HUBOT_XMPP_USERNAME=borat@wiredcraft.teamchat.io
 export HUBOT_XMPP_PASSWORD=fghdfiw0*hf
-export HUBOT_XMPP_ROOMS=all@conference.wiredcraft.teamchat.io
+export HUBOT_XMPP_ROOMS=all@conference.wiredcraft.teamchat.io,dashboard@conference.wiredcraft.teamchat.io
 export HUBOT_NAME=Borat
 export HUBOT_ALIAS=_Borat
 
