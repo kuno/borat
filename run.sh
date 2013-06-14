@@ -13,5 +13,6 @@ export HUBOT_GITHUB_TOKEN="c2ea629f0a4619abd039df7e07ecc5bcb7e57917"
 
 RUNNING=$(ps aux | grep -i hubot | grep -v grep | wc -l)
 if [ $RUNNING -lt 1 ]; then
+  git pull 
   ./bin/hubot --adapter xmpp > /dev/null 2>&1 &
 fi
