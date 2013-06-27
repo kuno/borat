@@ -61,6 +61,10 @@ greetings = [
   "Dzien dobry!"
 ]
 
+insults = [
+  "Screw you vanilla face!"
+]
+
 module.exports = function(robot) {
   robot.hear(/very nice/i, function(msg) {
     return msg.send("High five!!")
@@ -72,6 +76,10 @@ module.exports = function(robot) {
 
   robot.hear(/ ?(hi|hey|yo|whats up|hello|greetings) borat/i, function(msg) {
     return msg.send(msg.random(greetings));
+  })
+  
+  robot.hear(/ ?shut up borat/i, function(msg) {
+    return msg.send(msg.random(insults));
   })
 
   robot.respond(/quote/i, function(msg) {
