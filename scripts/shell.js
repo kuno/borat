@@ -37,40 +37,59 @@ module.exports = function(robot) {
 
   });
 
-  robot.respond(/test/i, function(msg) {
+  robot.respond(/cmd example2/i, function(msg) {
     var util = require('util'),
-        spawn = require('child_process').spawn,
-        cmd = spawn('sudo', ['ejabberdctl', 'register', 'Archer', 'wiredcraft.teamchat.io', 'P@ssword']);
+        exec = require('child_process').exec,
+        child;
 
-    cmd.stdout.on('data', function (data) {
-      return msg.send('stdout: ' + data);
-    });
+    child = exec('ls -lh /usr',
+      function(error, stdout, stderr) {
+        console.log('stdout ' + stdout);
+        // console.log('stderr ' + stderr);
+        return msn.send(stdout);
+        if (error !== null) {
+          console.log('exec error: ' + error);
+        }
+      })
 
-    cmd.stderr.on('data', function (data) {
-      return msg.send('stderr: ' + data);
-    });
-
-    cmd.on('exit', function (code) {
-      return msg.send('child process exited with code' + code)
-    });
   });
 
-  robot.respond(/test2/i, function(msg) {
-    var util = require('util'),
-        spawn = require('child_process').spawn,
-        cmd = spawn('sudo', ['ejabberdctl', 'srg_user_add', 'Archer', 'wiredcraft.teamchat.io', 'Wiredcraft', 'wiredcraft.teamchat.io']);
 
-    cmd.stdout.on('data', function (data) {
-      return msg.send('stdout: ' + data);
-    });
 
-    cmd.stderr.on('data', function (data) {
-      return msg.send('stderr: ' + data);
-    });
+  // robot.respond(/adskfajsdlkfjasdl/i, function(msg) {
+  //   var util = require('util'),
+  //       spawn = require('child_process').spawn,
+  //       cmd = spawn('sudo', ['ejabberdctl', 'register', 'Archer', 'wiredcraft.teamchat.io', 'P@ssword']);
 
-    cmd.on('exit', function (code) {
-      return msg.send('child process exited with code' + code)
-    });
-  });
+  //   cmd.stdout.on('data', function (data) {
+  //     return msg.send('stdout: ' + data);
+  //   });
+
+  //   // cmd.stderr.on('data', function (data) {
+  //   //   return msg.send('stderr: ' + data);
+  //   // });
+
+  //   cmd.on('exit', function (code) {
+  //     return msg.send('child process exited with code' + code)
+  //   });
+  // });
+
+  // robot.respond(/akfjsdakfljasd/i, function(msg) {
+  //   var util = require('util'),
+  //       spawn = require('child_process').spawn,
+  //       cmd = spawn('sudo', ['ejabberdctl', 'srg_user_add', 'Archer', 'wiredcraft.teamchat.io', 'Wiredcraft', 'wiredcraft.teamchat.io']);
+
+  //   cmd.stdout.on('data', function (data) {
+  //     return msg.send('stdout: ' + data);
+  //   });
+
+  //   // cmd.stderr.on('data', function (data) {
+  //   //   return msg.send('stderr: ' + data);
+  //   // });
+
+  //   cmd.on('exit', function (code) {
+  //     return msg.send('child process exited with code' + code)
+  //   });
+  // });
 
 };
