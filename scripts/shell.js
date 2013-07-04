@@ -23,7 +23,7 @@ module.exports = function(robot) {
     
     child = exec('ls -lh /usr',
       function(error, stdout, stderr) {
-        msg.send(stdout, stderr);
+        msg.send(stdout, stderr, 'wooohoooo');
         if (error !== null) {
           msg.send('exec error ' + error);
         } else {
