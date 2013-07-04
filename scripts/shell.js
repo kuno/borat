@@ -18,7 +18,7 @@
 // Globally available variables, functions and more...
 var util = require('util'),
     exec = require('child_process').exec,
-    child;
+    child, abort;
 
 function makePass() {
   var x = "";
@@ -59,17 +59,38 @@ module.exports = function(robot) {
     var user;
     user = msg.match[1];
 
-    child = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io && sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
-      function(error, stdout, stderr) {
-        msg.send(stdout, stderr);
-        if (error !== null) {
-          msg.send('exec error: ' + error);
-        } else {
-          msg.send('' + user + ' has been kicked.');
-        }
-      }
-    )
+    msg.send('Kicking in 10 seconds. \n Type "abort" to cancel.');
 
+    setTimeout(function() {
+      if (abort) {
+        abort = false;
+      } else {
+        msg.send('Kicking...');
+        child = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io && sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
+          function(error, stdout, stderr) {
+            msg.send(stdout, stderr);
+            if (error !== null) {
+              msg.send('exec error: ' + error);
+            } else {
+              msg.send('' + user + ' has been kicked.');
+            }
+          }
+        )
+      }
+
+    }, 10000)
+
+
+  });
+
+  // ABORT
+  robot.hear(/abort/i, function(msg) {
+    msg.send('Kicking ' + user + ' aborted');
+    abort = true;
+  });
+  robot.respond(/abort/i, function(msg) {
+    msg.send('Kicking ' + user + ' aborted');
+    abort = true;
   });
 
 
