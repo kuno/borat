@@ -56,14 +56,17 @@ module.exports = function(robot) {
 
   // REMOVE USER FROM JABBER
   robot.respond(/kick (.*)/i, function(msg) {
-    var user;
+    var user, kicking;
+    kicking = true;
     user = msg.match[1];
 
     msg.send('Kicking in 10 seconds. \n Type "abort" to cancel.');
 
     robot.hear(/abort/i, function(msg) {
-      msg.send('Kicking ' + user + ' aborted');
-      abort = true;
+      if (kicking) {
+        msg.send('Kicking ' + user + ' aborted');
+        abort = true;
+      }
     });
 
     setTimeout(function() {
