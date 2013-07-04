@@ -37,4 +37,35 @@ module.exports = function(robot) {
 
   });
 
+  robot.respond(/testdonottouch/i, function(msg) {
+    var util = require('util'),
+        spawn = require('child_process').spawn,
+        cmd = spawn('sudo ejabberdctl register Archer wiredcraft.teamchat.io P@ssword');
+        cmz = spawn('sudo ejabberdctl srg_user_add Archer wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io');
+
+        cmd.stdout.on('data', function (data) {
+          return msg.send('stdout: ' + data);
+        });
+
+        cmd.stderr.on('data', function (data) {
+          return msg.send('stderr: ' + data);
+        });
+
+        cmd.on('exit', function (code) {
+          return msg.send('child process exited with code' + code)
+        })
+
+        cmz.stdout.on('data', function (data) {
+          return msg.send('stdout: ' + data);
+        });
+
+        cmz.stderr.on('data', function (data) {
+          return msg.send('stderr: ' + data);
+        });
+
+        cmz.on('exit', function (code) {
+          return msg.send('child process exited with code' + code)
+        })
+  });
+
 };
