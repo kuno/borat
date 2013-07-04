@@ -41,9 +41,10 @@ module.exports = function(robot) {
       child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + ' && sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
         function(error, stdout, stderr) {
           msg.send(stdout, stderr);
-          msg.send('Password is ' + pass + '')
           if (error !== null) {
             msg.send('exec error: ' + error);
+          } else {
+            msg.send('Password is ' + pass + '')
           }
         }
       )
@@ -63,7 +64,7 @@ module.exports = function(robot) {
     msg.send('Kicking in 10 seconds. \n Type "abort" to cancel.');
 
     robot.hear(/abort/i, function(msg) {
-      if (kicking) {
+      if (kicking === true) {
         msg.send('Kicking ' + user + ' aborted');
         abort = true;
       }
