@@ -60,7 +60,6 @@ module.exports = function(robot) {
     msg.send('Kicking in 10 seconds. \n Type "abort" to cancel.');
     
     robot.hear(/abort/i, function(msg) {
-      msg.send(kicking + ' - kicking value');
       if (kicking) {
         msg.send('Kicking ' + user + ' aborted');
         abort = true;
@@ -86,7 +85,6 @@ module.exports = function(robot) {
         )
       }
       kicking = false;
-      msg.send(kicking + ' - kicking value');
     }, 10000)
 
   });
