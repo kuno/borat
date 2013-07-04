@@ -61,6 +61,11 @@ module.exports = function(robot) {
 
     msg.send('Kicking in 10 seconds. \n Type "abort" to cancel.');
 
+    robot.hear(/abort/i, function(msg) {
+      msg.send('Kicking ' + user + ' aborted');
+      abort = true;
+    });
+
     setTimeout(function() {
       if (abort) {
         abort = false;
@@ -77,20 +82,9 @@ module.exports = function(robot) {
           }
         )
       }
-
     }, 10000)
 
 
-  });
-
-  // ABORT
-  robot.hear(/abort/i, function(msg) {
-    msg.send('Kicking ' + user + ' aborted');
-    abort = true;
-  });
-  robot.respond(/abort/i, function(msg) {
-    msg.send('Kicking ' + user + ' aborted');
-    abort = true;
   });
 
 
