@@ -36,47 +36,39 @@ module.exports = function(robot) {
 
 
   // ADD USER TO JABBER
-  robot.respond(/cmd add (.*) (.*)/i, function(msg) {
-    var add, reg;
+  robot.respond(/invite (.*)/i, function(msg) {
     var user, pass;
     user = msg.match[1];
-    pass = msg.match[2];
 
-    child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + ' && sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
-      function(error, stdout, stderr) {
-        msg.send(stdout, stderr);
-        if (error !== null) {
-          msg.send('exec error: ' + error);
-        } else {
-          msg.send('Completed with no errors.');
+    function makePass() {
+      var x = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for (var i = 0; i < 8; i++) {
+        x += possible.charAt(Math.floor(Math.random() * possible.length));
+      };
+      return x;
+    }
+    var pass = makePass();
+    msg.send('Password is ' + pass + '')
+
+    if (pass !== undefined) {
+      child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + ' && sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
+        function(error, stdout, stderr) {
+          msg.send(stdout, stderr);
+          if (error !== null) {
+            msg.send('exec error: ' + error);
+          }
         }
-      }
-    )
-
-    // reg = exec('sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
-    //   function(error, stdout, stderr) {
-    //     msg.send(stdout, stderr);
-    //     if (error !== null) {
-    //       msg.send('exec error: ' + error);
-    //     } else {
-    //       msg.send('Completed with no errors.');
-    //     }
-    //   }
-    // )
+      )
+    } else {
+      msg.send('Password is undefined - Result: ' + pass)
+    }
 
   });
 
 
-  // REGISTER USER ON JABBER
-  // robot.respond(/cmd register (.*)/i, function(msg) {
-  //   var user;
-  //   user = msg.match[1];
-  // });
-
-
   // REMOVE USER FROM JABBER
-  robot.respond(/cmd remove (.*)/i, function(msg) {
-    var rem, ureg;
+  robot.respond(/kick (.*)/i, function(msg) {
     var user;
     user = msg.match[1];
 
@@ -86,29 +78,11 @@ module.exports = function(robot) {
         if (error !== null) {
           msg.send('exec error: ' + error);
         } else {
-          msg.send('Completed with no errors.');
+          msg.send('' + user + ' has been kicked.');
         }
       }
     )
 
-    // ureg = exec('sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
-    //   function(error, stdout, stderr) {
-    //     msg.send(stdout, stderr);
-    //     if (error !== null) {
-    //       msg.send('exec error: ' + error);
-    //     } else {
-    //       msg.send('Completed with no errors.');
-    //     }
-    //   }
-    // )
-
   });
-
-
-  // UNREGISTER USER FROM JABBER
-  // robot.respond(/cmd unregister (.*)/i, function(msg) {
-  //   var user;
-  //   user = msg.match[1];
-  // });
 
 };
