@@ -57,9 +57,9 @@ module.exports = function(robot) {
     kicking = true;
     user = msg.match[1];
 
-    msg.send('Kicking in 10 seconds. \n Type "abort" to cancel.');
+    msg.send('Kicking in 10 seconds. \n Type "/abort" or "borat abort" to cancel.');
     
-    robot.hear(/abort/i, function(msg) {
+    robot.respond(/abort/i, function(msg) {
       if (kicking) {
         msg.send('Kicking ' + user + ' aborted');
         abort = true;
