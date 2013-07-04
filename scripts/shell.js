@@ -14,33 +14,12 @@
 //   Jamesford
 
 module.exports = function(robot) {
+  var util = require('util'),
+      exec = require('child_process').exec,
+      child;
 
+  // EXAMPLE OF RUNNING CMD LINE FROM HUBOT
   robot.respond(/cmd example/i, function(msg) {
-    var util  = require('util'),
-        spawn = require('child_process').spawn,
-        ls    = spawn('ls', ['-lh', '/usr']);
-
-    ls.stdout.on('data', function (data) {
-      console.log('stdout: ' + data);
-      return msg.send('stdout: ' + data);
-    });
-
-    ls.stderr.on('data', function (data) {
-      console.log('stderr: ' + data);
-      return msg.send('stderr ' + data);
-    });
-
-    ls.on('exit', function (code) {
-      console.log('child process exited with code ' + code);
-      return msg.send('child process exited with code ' + code);
-    });
-
-  });
-
-  robot.respond(/cmd example2/i, function(msg) {
-    var util = require('util'),
-        exec = require('child_process').exec,
-        child;
 
     child = exec('ls -lh /usr   ',
       function(error, stdout, stderr) {
@@ -54,12 +33,16 @@ module.exports = function(robot) {
 
   });
 
-  robot.respond(/cmd test/i, function(msg) {
-    var util = require('util'),
-        exec = require('child_process').exec,
-        child;
+  // ADD USER TO JABBER
+  robot.respond(/cmd add (.*) (.*)/i, function(msg) {
+    var user, pass;
+    user = msg.match[1];
+    pass = msg.match[2];
 
-    child = exec('sudo ejabberdctl register archer wiredcraft.teamchat.io P@ssword',
+    msg.reply('Username - ' + user);
+    msg.reply('Password - ' + pass);
+
+    child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + '',
       function(error, stdout, stderr) {
         console.log('stdout ' + stdout);
         // console.log('stderr ' + stderr);
@@ -71,12 +54,14 @@ module.exports = function(robot) {
 
   });
 
-  robot.respond(/cmd test2/i, function(msg) {
-    var util = require('util'),
-        exec = require('child_process').exec,
-        child;
+  // REGISTER USER ON JABBER
+  robot.respond(/cmd register (.*)/i, function(msg) {
+    var user;
+    user = msg.match[1];
 
-    child = exec('sudo ejabberdctl srg_user_add archer wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
+    msg.reply('Username - ' + user);
+
+    child = exec('sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
         console.log('stdout ' + stdout);
         // console.log('stderr ' + stderr);
@@ -86,44 +71,54 @@ module.exports = function(robot) {
         }
       })
 
-  });  
+  });
 
+  // REMOVE USER FROM JABBER
+  robot.respond(/cmd remove (.*)/i, function(msg) {
+    var user;
+    user = msg.match[1];
 
+    msg.reply('Username - ' + user);
 
-  // robot.respond(/adskfajsdlkfjasdl/i, function(msg) {
-  //   var util = require('util'),
-  //       spawn = require('child_process').spawn,
-  //       cmd = spawn('sudo', ['ejabberdctl', 'register', 'Archer', 'wiredcraft.teamchat.io', 'P@ssword']);
+    child = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
+      function(error, stdout, stderr) {
+        console.log('stdout ' + stdout);
+        // console.log('stderr ' + stderr);
+        return msg.send('stdout');
+        if (error !== null) {
+          console.log('exec error ' + error);
+        }
+      })
 
-  //   cmd.stdout.on('data', function (data) {
-  //     return msg.send('stdout: ' + data);
-  //   });
+  });
 
-  //   // cmd.stderr.on('data', function (data) {
-  //   //   return msg.send('stderr: ' + data);
-  //   // });
+  // UNREGISTER USER FROM JABBER
+  robot.respond(/cmd unregister (.*)/i, function(msg) {
+    var user;
+    user = msg.match[1];
 
-  //   cmd.on('exit', function (code) {
-  //     return msg.send('child process exited with code' + code)
-  //   });
-  // });
+    msg.reply('Username - ' + user);
 
-  // robot.respond(/akfjsdakfljasd/i, function(msg) {
-  //   var util = require('util'),
-  //       spawn = require('child_process').spawn,
-  //       cmd = spawn('sudo', ['ejabberdctl', 'srg_user_add', 'Archer', 'wiredcraft.teamchat.io', 'Wiredcraft', 'wiredcraft.teamchat.io']);
+    child = exec('sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
+      function(error, stdout, stderr) {
+        console.log('stdout ' + stdout);
+        // console.log('stderr ' + stderr);
+        return msg.send('stdout');
+        if (error !== null) {
+          console.log('exec error ' + error);
+        }
+      })
 
-  //   cmd.stdout.on('data', function (data) {
-  //     return msg.send('stdout: ' + data);
-  //   });
+  });
 
-  //   // cmd.stderr.on('data', function (data) {
-  //   //   return msg.send('stderr: ' + data);
-  //   // });
+  // RUN TESTS OR WHATEVER HERE
+  robot.respond(/cmd test (.*) (.*)/i, function(msg) {
+    var one, two, three, four;
+    one = msg.match[1];
+    two = msg.match[2];
 
-  //   cmd.on('exit', function (code) {
-  //     return msg.send('child process exited with code' + code)
-  //   });
-  // });
+    msg.reply('You said ' + one + ' ' + two);
+    msg.reply(something, another);
+  });
 
 };
