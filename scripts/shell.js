@@ -87,7 +87,7 @@ module.exports = function(robot) {
       }
     }, 10000)
 
-
+    kicking = false;
   });
 
 
