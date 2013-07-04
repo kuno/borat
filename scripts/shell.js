@@ -23,9 +23,9 @@ module.exports = function(robot) {
 
     child = exec('ls -lh /usr   ',
       function(error, stdout, stderr) {
-        return msg.send(stdout, stderr);
+        msg.send(stdout, stderr);
         if (error !== null) {
-          console.log('exec error: ' + error);
+          // console.log('exec error: ' + error);
         }
       })
 
@@ -42,7 +42,7 @@ module.exports = function(robot) {
 
     child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + '',
       function(error, stdout, stderr) {
-        return msg.send(stdout, stderr);
+        msg.send(stdout, stderr);
         if (error !== null) {
           console.log('exec error: ' + error);
           msg.send('exec error: ' + error);
@@ -60,7 +60,7 @@ module.exports = function(robot) {
 
     child = exec('sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
-        return msg.send(stdout, stderr);
+        msg.send(stdout, stderr);
         if (error !== null) {
           console.log('exec error: ' + error);
           msg.send('exec error: ' + error);
@@ -78,7 +78,7 @@ module.exports = function(robot) {
 
     child = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
-        return msg.send(stdout, stderr);
+        msg.send(stdout, stderr);
         if (error !== null) {
           console.log('exec error ' + error);
           msg.send('exec error: ' + error);
@@ -96,7 +96,7 @@ module.exports = function(robot) {
 
     child = exec('sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
-        return msg.send(stdout, stderr);
+        msg.send(stdout, stderr);
         if (error !== null) {
           console.log('exec error ' + error);
           msg.send('exec error: ' + error);
