@@ -37,35 +37,40 @@ module.exports = function(robot) {
 
   });
 
-  robot.respond(/testdonottouch/i, function(msg) {
+  robot.respond(/test/i, function(msg) {
     var util = require('util'),
         spawn = require('child_process').spawn,
         cmd = spawn('sudo ejabberdctl', ['register', 'Archer', 'wiredcraft.teamchat.io', 'P@ssword']);
-        cmz = spawn('sudo ejabberdctl', ['srg_user_add', 'Archer', 'wiredcraft.teamchat.io', 'Wiredcraft', 'wiredcraft.teamchat.io']);
 
-        cmd.stdout.on('data', function (data) {
-          return msg.send('stdout: ' + data);
-        });
+    cmd.stdout.on('data', function (data) {
+      return msg.send('stdout: ' + data);
+    });
 
-        cmd.stderr.on('data', function (data) {
-          return msg.send('stderr: ' + data);
-        });
+    cmd.stderr.on('data', function (data) {
+      return msg.send('stderr: ' + data);
+    });
 
-        cmd.on('exit', function (code) {
-          return msg.send('child process exited with code' + code)
-        })
+    cmd.on('exit', function (code) {
+      return msg.send('child process exited with code' + code)
+    });
+  });
 
-        cmz.stdout.on('data', function (data) {
-          return msg.send('stdout: ' + data);
-        });
+  robot.respond(/test2/i, function(msg) {
+    var util = require('util'),
+        spawn = require('child_process').spawn,
+        cmd = spawn('sudo ejabberdctl', ['srg_user_add', 'Archer', 'wiredcraft.teamchat.io', 'Wiredcraft', 'wiredcraft.teamchat.io']);
 
-        cmz.stderr.on('data', function (data) {
-          return msg.send('stderr: ' + data);
-        });
+    cmd.stdout.on('data', function (data) {
+      return msg.send('stdout: ' + data);
+    });
 
-        cmz.on('exit', function (code) {
-          return msg.send('child process exited with code' + code)
-        })
+    cmd.stderr.on('data', function (data) {
+      return msg.send('stderr: ' + data);
+    });
+
+    cmd.on('exit', function (code) {
+      return msg.send('child process exited with code' + code)
+    });
   });
 
 };
