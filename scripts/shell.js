@@ -8,7 +8,8 @@
 //   None
 //
 // Commands:
-//   hubot cmd - a command
+//   hubot invite <user> - invite user to jabber
+//   hubot kick <user> - remove user from jabber
 //
 // Author:
 //   Jamesford
@@ -29,29 +30,12 @@ function makePass() {
 }
 
 module.exports = function(robot) {
-  
-  // EXAMPLE OF RUNNING CMD LINE FROM HUBOT
-  robot.respond(/cmd example/i, function(msg) {
-    
-    child = exec('ls -lh /usr',
-      function(error, stdout, stderr) {
-        msg.send(stdout, stderr, 'wooohoooo');
-        if (error !== null) {
-          msg.send('exec error ' + error);
-        } else {
-          msg.send('Completed with no errors.'); // include if nothing is returned by the command
-        }
-      }
-    )
-
-  });
-
 
   // ADD USER TO JABBER
   robot.respond(/invite (.*)/i, function(msg) {
     var user, pass;
     user = msg.match[1];
-    var pass = makePass();
+    pass = makePass();
 
     if (pass !== undefined) {
       child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + ' && sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
@@ -64,7 +48,7 @@ module.exports = function(robot) {
         }
       )
     } else {
-      msg.send('Password is undefined - Result: ' + pass)
+      msg.send('Password is undefined \n Check the /scripts/shell.js file for errors');
     }
 
   });
@@ -87,5 +71,22 @@ module.exports = function(robot) {
     )
 
   });
+
+
+  // EXAMPLE
+  // robot.respond(/cmd example/i, function(msg) {
+    
+  //   child = exec('ls -lh /usr',
+  //     function(error, stdout, stderr) {
+  //       msg.send(stdout, stderr, 'wooohoooo');
+  //       if (error !== null) {
+  //         msg.send('exec error ' + error);
+  //       } else {
+  //         msg.send('Completed with no errors.'); // include if nothing is returned by the command
+  //       }
+  //     }
+  //   )
+
+  // });
 
 };
