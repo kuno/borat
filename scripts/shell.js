@@ -23,9 +23,7 @@ module.exports = function(robot) {
 
     child = exec('ls -lh /usr   ',
       function(error, stdout, stderr) {
-        console.log('stdout ' + stdout);
-        // console.log('stderr ' + stderr);
-        return msg.send(stdout);
+        return msg.send(stdout, stderr);
         if (error !== null) {
           console.log('exec error: ' + error);
         }
@@ -39,16 +37,15 @@ module.exports = function(robot) {
     user = msg.match[1];
     pass = msg.match[2];
 
-    msg.reply('Username - ' + user);
-    msg.reply('Password - ' + pass);
+    // msg.reply('Username - ' + user);
+    // msg.reply('Password - ' + pass);
 
     child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + '',
       function(error, stdout, stderr) {
-        console.log('stdout ' + stdout);
-        // console.log('stderr ' + stderr);
-        return msg.send(stdout);
+        return msg.send(stdout, stderr);
         if (error !== null) {
           console.log('exec error: ' + error);
+          msg.send('exec error: ' + error);
         }
       })
 
@@ -59,15 +56,14 @@ module.exports = function(robot) {
     var user;
     user = msg.match[1];
 
-    msg.reply('Username - ' + user);
+    // msg.reply('Username - ' + user);
 
     child = exec('sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
-        console.log('stdout ' + stdout);
-        // console.log('stderr ' + stderr);
-        return msg.send(stdout);
+        return msg.send(stdout, stderr);
         if (error !== null) {
           console.log('exec error: ' + error);
+          msg.send('exec error: ' + error);
         }
       })
 
@@ -78,15 +74,14 @@ module.exports = function(robot) {
     var user;
     user = msg.match[1];
 
-    msg.reply('Username - ' + user);
+    // msg.reply('Username - ' + user);
 
     child = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
-        console.log('stdout ' + stdout);
-        // console.log('stderr ' + stderr);
-        return msg.send('stdout' + stdout);
+        return msg.send(stdout, stderr);
         if (error !== null) {
           console.log('exec error ' + error);
+          msg.send('exec error: ' + error);
         }
       })
 
@@ -97,27 +92,17 @@ module.exports = function(robot) {
     var user;
     user = msg.match[1];
 
-    msg.reply('Username - ' + user);
+    // msg.reply('Username - ' + user);
 
     child = exec('sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
-        console.log('stdout ' + stdout);
-        // console.log('stderr ' + stderr);
-        return msg.send('stdout ' + stdout);
+        return msg.send(stdout, stderr);
         if (error !== null) {
           console.log('exec error ' + error);
+          msg.send('exec error: ' + error);
         }
       })
 
-  });
-
-  // RUN TESTS OR WHATEVER HERE
-  robot.respond(/cmd test (.*) (.*)/i, function(msg) {
-    var one, two, three, four;
-    one = msg.match[1];
-    two = msg.match[2];
-
-    msg.reply('You said ' + one + ' ' + two);
   });
 
 };
