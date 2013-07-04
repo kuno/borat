@@ -21,11 +21,8 @@ var util = require('util'),
     child, abort, kicking;
 
 function makePass() {
-  var x = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (var i = 0; i < 8; i++) {
-    x += possible.charAt(Math.floor(Math.random() * possible.length));
-  };
+  var x;
+  x = Math.random().toString(36).slice(-8);
   return x;
 }
 
