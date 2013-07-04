@@ -85,6 +85,8 @@ module.exports = function(robot) {
           }
         )
       }
+      kicking = false;
+      msg.send(kicking + ' - kicking value');
     }, 10000)
 
   });
