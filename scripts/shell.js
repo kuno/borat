@@ -8,7 +8,7 @@
 //   None
 //
 // Commands:
-//   hubot cmd - a commands
+//   hubot cmd - a command
 //
 // Author:
 //   Jamesford
@@ -20,17 +20,15 @@ module.exports = function(robot) {
 
   // EXAMPLE OF RUNNING CMD LINE FROM HUBOT
   robot.respond(/cmd example/i, function(msg) {
-
-    child = exec('ls -lh /usr   ',
+    child = exec('ls -lh /usr',
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
-          console.log('exec error: ' + error);
+          msg.send('exec error ' + error);
         } else {
-          msg.send('Completed with no errors.');
+          msg.send('Completed with no errors.'); // include if nothing is returned by the command
         }
       })
-
   });
 
 
@@ -44,7 +42,6 @@ module.exports = function(robot) {
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
-          console.log('exec error: ' + error);
           msg.send('exec error: ' + error);
         } else {
           msg.send('Completed with no errors.');
@@ -63,7 +60,6 @@ module.exports = function(robot) {
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
-          console.log('exec error: ' + error);
           msg.send('exec error: ' + error);
         } else {
           msg.send('Completed with no errors.');
@@ -82,7 +78,6 @@ module.exports = function(robot) {
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
-          console.log('exec error ' + error);
           msg.send('exec error: ' + error);
         } else {
           msg.send('Completed with no errors.');
@@ -101,7 +96,6 @@ module.exports = function(robot) {
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
-          console.log('exec error ' + error);
           msg.send('exec error: ' + error);
         } else {
           msg.send('Completed with no errors.');
