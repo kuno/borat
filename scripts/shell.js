@@ -42,7 +42,7 @@ module.exports = function(robot) {
     user = msg.match[1];
     pass = msg.match[2];
 
-    add = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + '',
+    child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + ' && sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
@@ -53,16 +53,16 @@ module.exports = function(robot) {
       }
     )
 
-    reg = exec('sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
-      function(error, stdout, stderr) {
-        msg.send(stdout, stderr);
-        if (error !== null) {
-          msg.send('exec error: ' + error);
-        } else {
-          msg.send('Completed with no errors.');
-        }
-      }
-    )
+    // reg = exec('sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
+    //   function(error, stdout, stderr) {
+    //     msg.send(stdout, stderr);
+    //     if (error !== null) {
+    //       msg.send('exec error: ' + error);
+    //     } else {
+    //       msg.send('Completed with no errors.');
+    //     }
+    //   }
+    // )
 
   });
 
@@ -80,7 +80,7 @@ module.exports = function(robot) {
     var user;
     user = msg.match[1];
 
-    rem = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
+    child = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io && sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
@@ -91,16 +91,16 @@ module.exports = function(robot) {
       }
     )
 
-    ureg = exec('sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
-      function(error, stdout, stderr) {
-        msg.send(stdout, stderr);
-        if (error !== null) {
-          msg.send('exec error: ' + error);
-        } else {
-          msg.send('Completed with no errors.');
-        }
-      }
-    )
+    // ureg = exec('sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
+    //   function(error, stdout, stderr) {
+    //     msg.send(stdout, stderr);
+    //     if (error !== null) {
+    //       msg.send('exec error: ' + error);
+    //     } else {
+    //       msg.send('Completed with no errors.');
+    //     }
+    //   }
+    // )
 
   });
 
