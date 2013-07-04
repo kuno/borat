@@ -59,12 +59,15 @@ module.exports = function(robot) {
 
     msg.send('Kicking in 10 seconds. \n Type "abort" to cancel.');
     
-    if (kicking) {
-      robot.hear(/abort/i, function(msg) {
+    robot.hear(/abort/i, function(msg) {
+      msg.send(kicking + ' - kicking value');
+      if (kicking) {
         msg.send('Kicking ' + user + ' aborted');
         abort = true;
-      });
-    }
+      } else {
+        msg.send('Nothing to abort');
+      }
+    });
 
     setTimeout(function() {
       if (abort) {
@@ -84,7 +87,6 @@ module.exports = function(robot) {
       }
     }, 10000)
 
-    kicking = false;
   });
 
 
