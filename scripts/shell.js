@@ -37,20 +37,16 @@ module.exports = function(robot) {
     user = msg.match[1];
     pass = makePass();
 
-    if (pass !== undefined) {
-      child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + ' && sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
-        function(error, stdout, stderr) {
-          msg.send(stdout, stderr);
-          if (error !== null) {
-            msg.send('exec error: ' + error);
-          } else {
-            msg.send('Password is ' + pass + '')
-          }
+    child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + ' && sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
+      function(error, stdout, stderr) {
+        msg.send(stdout, stderr);
+        if (error !== null) {
+          msg.send('exec error: ' + error);
+        } else {
+          msg.send('Password is ' + pass + '')
         }
-      )
-    } else {
-      msg.send('Password is undefined \n Check the /scripts/shell.js file for errors');
-    }
+      }
+    )
 
   });
 
@@ -62,13 +58,13 @@ module.exports = function(robot) {
     user = msg.match[1];
 
     msg.send('Kicking in 10 seconds. \n Type "abort" to cancel.');
-
-    robot.hear(/abort/i, function(msg) {
-      if (kicking === true) {
+    
+    if (kicking) {
+      robot.hear(/abort/i, function(msg) {
         msg.send('Kicking ' + user + ' aborted');
         abort = true;
-      }
-    });
+      });
+    }
 
     setTimeout(function() {
       if (abort) {
