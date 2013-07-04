@@ -20,6 +20,7 @@ module.exports = function(robot) {
 
   // EXAMPLE OF RUNNING CMD LINE FROM HUBOT
   robot.respond(/cmd example/i, function(msg) {
+    
     child = exec('ls -lh /usr',
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
@@ -28,7 +29,9 @@ module.exports = function(robot) {
         } else {
           msg.send('Completed with no errors.'); // include if nothing is returned by the command
         }
-      })
+      }
+    )
+
   });
 
 
@@ -46,15 +49,8 @@ module.exports = function(robot) {
         } else {
           msg.send('Completed with no errors.');
         }
-      })
-
-  });
-
-
-  // REGISTER USER ON JABBER
-  robot.respond(/cmd register (.*)/i, function(msg) {
-    var user;
-    user = msg.match[1];
+      }
+    )
 
     child = exec('sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
@@ -64,9 +60,17 @@ module.exports = function(robot) {
         } else {
           msg.send('Completed with no errors.');
         }
-      })
+      }
+    )
 
   });
+
+
+  // REGISTER USER ON JABBER
+  // robot.respond(/cmd register (.*)/i, function(msg) {
+  //   var user;
+  //   user = msg.match[1];
+  // });
 
 
   // REMOVE USER FROM JABBER
@@ -82,15 +86,8 @@ module.exports = function(robot) {
         } else {
           msg.send('Completed with no errors.');
         }
-      })
-
-  });
-
-
-  // UNREGISTER USER FROM JABBER
-  robot.respond(/cmd unregister (.*)/i, function(msg) {
-    var user;
-    user = msg.match[1];
+      }
+    )
 
     child = exec('sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
@@ -100,8 +97,16 @@ module.exports = function(robot) {
         } else {
           msg.send('Completed with no errors.');
         }
-      })
+      }
+    )
 
   });
+
+
+  // UNREGISTER USER FROM JABBER
+  // robot.respond(/cmd unregister (.*)/i, function(msg) {
+  //   var user;
+  //   user = msg.match[1];
+  // });
 
 };
