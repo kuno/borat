@@ -84,7 +84,7 @@ module.exports = function(robot) {
       function(error, stdout, stderr) {
         console.log('stdout ' + stdout);
         // console.log('stderr ' + stderr);
-        return msg.send('stdout');
+        return msg.send('stdout' + stdout);
         if (error !== null) {
           console.log('exec error ' + error);
         }
@@ -103,7 +103,7 @@ module.exports = function(robot) {
       function(error, stdout, stderr) {
         console.log('stdout ' + stdout);
         // console.log('stderr ' + stderr);
-        return msg.send('stdout');
+        return msg.send('stdout ' + stdout);
         if (error !== null) {
           console.log('exec error ' + error);
         }
@@ -118,7 +118,6 @@ module.exports = function(robot) {
     two = msg.match[2];
 
     msg.reply('You said ' + one + ' ' + two);
-    msg.reply(something, another);
   });
 
 };
