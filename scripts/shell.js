@@ -40,8 +40,8 @@ module.exports = function(robot) {
   robot.respond(/testdonottouch/i, function(msg) {
     var util = require('util'),
         spawn = require('child_process').spawn,
-        cmd = spawn('sudo ejabberdctl register Archer wiredcraft.teamchat.io P@ssword');
-        cmz = spawn('sudo ejabberdctl srg_user_add Archer wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io');
+        cmd = spawn('sudo ejabberdctl', ['register', 'Archer', 'wiredcraft.teamchat.io', 'P@ssword']);
+        cmz = spawn('sudo ejabberdctl', ['srg_user_add', 'Archer', 'wiredcraft.teamchat.io', 'Wiredcraft', 'wiredcraft.teamchat.io']);
 
         cmd.stdout.on('data', function (data) {
           return msg.send('stdout: ' + data);
