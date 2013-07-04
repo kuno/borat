@@ -42,17 +42,51 @@ module.exports = function(robot) {
         exec = require('child_process').exec,
         child;
 
-    child = exec('ls -lh /usr',
+    child = exec('ls -lh /usr   ',
       function(error, stdout, stderr) {
         console.log('stdout ' + stdout);
         // console.log('stderr ' + stderr);
-        return msn.send(stdout);
+        return msg.send(stdout);
         if (error !== null) {
           console.log('exec error: ' + error);
         }
       })
 
   });
+
+  robot.respond(/cmd test/i, function(msg) {
+    var util = require('util'),
+        exec = require('child_process').exec,
+        child;
+
+    child = exec('sudo ejabberdctl register archer wiredcraft.teamchat.io P@ssword',
+      function(error, stdout, stderr) {
+        console.log('stdout ' + stdout);
+        // console.log('stderr ' + stderr);
+        return msg.send(stdout);
+        if (error !== null) {
+          console.log('exec error: ' + error);
+        }
+      })
+
+  });
+
+  robot.respond(/cmd test2/i, function(msg) {
+    var util = require('util'),
+        exec = require('child_process').exec,
+        child;
+
+    child = exec('sudo ejabberdctl srg_user_add archer wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
+      function(error, stdout, stderr) {
+        console.log('stdout ' + stdout);
+        // console.log('stderr ' + stderr);
+        return msg.send(stdout);
+        if (error !== null) {
+          console.log('exec error: ' + error);
+        }
+      })
+
+  });  
 
 
 
