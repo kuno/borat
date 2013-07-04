@@ -37,11 +37,12 @@ module.exports = function(robot) {
 
   // ADD USER TO JABBER
   robot.respond(/cmd add (.*) (.*)/i, function(msg) {
+    var add, reg;
     var user, pass;
     user = msg.match[1];
     pass = msg.match[2];
 
-    child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + '',
+    add = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + '',
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
@@ -52,7 +53,7 @@ module.exports = function(robot) {
       }
     )
 
-    child = exec('sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
+    reg = exec('sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
@@ -75,10 +76,11 @@ module.exports = function(robot) {
 
   // REMOVE USER FROM JABBER
   robot.respond(/cmd remove (.*)/i, function(msg) {
+    var rem, ureg;
     var user;
     user = msg.match[1];
 
-    child = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
+    rem = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
@@ -89,7 +91,7 @@ module.exports = function(robot) {
       }
     )
 
-    child = exec('sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
+    ureg = exec('sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
       function(error, stdout, stderr) {
         msg.send(stdout, stderr);
         if (error !== null) {
