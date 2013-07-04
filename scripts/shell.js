@@ -13,11 +13,23 @@
 // Author:
 //   Jamesford
 
-module.exports = function(robot) {
-  var util = require('util'),
-      exec = require('child_process').exec,
-      child;
 
+// Globally available variables, functions and more...
+var util = require('util'),
+    exec = require('child_process').exec,
+    child;
+
+function makePass() {
+  var x = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (var i = 0; i < 8; i++) {
+    x += possible.charAt(Math.floor(Math.random() * possible.length));
+  };
+  return x;
+}
+
+module.exports = function(robot) {
+  
   // EXAMPLE OF RUNNING CMD LINE FROM HUBOT
   robot.respond(/cmd example/i, function(msg) {
     
@@ -39,22 +51,13 @@ module.exports = function(robot) {
   robot.respond(/invite (.*)/i, function(msg) {
     var user, pass;
     user = msg.match[1];
-
-    function makePass() {
-      var x = "";
-      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      for (var i = 0; i < 8; i++) {
-        x += possible.charAt(Math.floor(Math.random() * possible.length));
-      };
-      return x;
-    }
     var pass = makePass();
-    msg.send('Password is ' + pass + '')
 
     if (pass !== undefined) {
       child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + ' && sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
         function(error, stdout, stderr) {
           msg.send(stdout, stderr);
+          msg.send('Password is ' + pass + '')
           if (error !== null) {
             msg.send('exec error: ' + error);
           }
