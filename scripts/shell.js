@@ -18,7 +18,7 @@
 // Globally available variables, functions and more...
 var util = require('util'),
     exec = require('child_process').exec,
-    child, abort;
+    child, abort, kicking;
 
 function makePass() {
   var x = "";
@@ -53,7 +53,7 @@ module.exports = function(robot) {
 
   // REMOVE USER FROM JABBER
   robot.respond(/kick (.*)/i, function(msg) {
-    var user, kicking;
+    var user;
     kicking = true;
     user = msg.match[1];
 
