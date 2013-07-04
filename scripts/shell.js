@@ -40,7 +40,7 @@ module.exports = function(robot) {
   robot.respond(/test/i, function(msg) {
     var util = require('util'),
         spawn = require('child_process').spawn,
-        cmd = spawn('sudo ejabberdctl', ['register', 'Archer', 'wiredcraft.teamchat.io', 'P@ssword']);
+        cmd = spawn('sudo', ['ejabberdctl', 'register', 'Archer', 'wiredcraft.teamchat.io', 'P@ssword']);
 
     cmd.stdout.on('data', function (data) {
       return msg.send('stdout: ' + data);
@@ -58,7 +58,7 @@ module.exports = function(robot) {
   robot.respond(/test2/i, function(msg) {
     var util = require('util'),
         spawn = require('child_process').spawn,
-        cmd = spawn('sudo ejabberdctl', ['srg_user_add', 'Archer', 'wiredcraft.teamchat.io', 'Wiredcraft', 'wiredcraft.teamchat.io']);
+        cmd = spawn('sudo', ['ejabberdctl', 'srg_user_add', 'Archer', 'wiredcraft.teamchat.io', 'Wiredcraft', 'wiredcraft.teamchat.io']);
 
     cmd.stdout.on('data', function (data) {
       return msg.send('stdout: ' + data);
