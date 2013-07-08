@@ -1,5 +1,9 @@
 # Borat Bot
 
+### Local Testing
+Remove `"redis-brain.coffee" from the hubot-scripts.json file. Then run `./bin/hubot` for a command line bot use.
+
+### Server Startup
 After cloning the repo and before doing anything else, `cd` into `borat` and `npm install`. Node.js and npm are required. After this run the `run.sh` file to start borat up.
 
 See [markstory/hubot-xmpp](https://github.com/markstory/hubot-xmpp) for full documentation of the XMPP adapter.
