@@ -1,12 +1,14 @@
 module.exports = function(robot) {
 
 	robot.respond(/cmd test/i, function(msg) {
-		msg.send(String(robot.brain.data.points));
+		console.log(robot.brain.data.users);
+		// data = String(robot.brain.data.users);
+		// msg.send(data);
 	});
 
-	robot.respond(/cmd storage delete/i, function(msg) {
-		delete robot.brain.data.users;
-		msg.send("Users Removed");
-	})
+	robot.respond(/storage delete (\w*)$/i, function(msg) {
+		delete robot.brain.data[msg.match[1]];
+		return msg.send("" + msg.match[1] + " deleted from storage.");
+	});
 	
 };
