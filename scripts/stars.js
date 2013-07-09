@@ -23,7 +23,10 @@ var award_stars, stars, save;
 stars = {};
 
 award_stars = function(msg, username, strs) {
-	stars[username] += parseInt(strs);
+	if (stars[username] === null || stars[username] === NaN) {
+    stars[username] = 0;
+  };
+  stars[username] += parseInt(strs);
 	return msg.send(strs + 'Awarded to ' + username);
 };
 
