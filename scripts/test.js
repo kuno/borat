@@ -1,7 +1,7 @@
 module.exports = function(robot) {
 
 	robot.respond(/cmd test/i, function(msg) {
-		msg.send(robot.brain.data.points);
+		msg.send(String(robot.brain.data.points));
 	});
 
 	robot.respond(/cmd storage delete/i, function(msg) {
