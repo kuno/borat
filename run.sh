@@ -3,25 +3,18 @@
 source /etc/profile
 cd /opt/borat
 
-# Use config file
-source config/sample.cfg
+export HUBOT_XMPP_USERNAME=borat@wiredcraft.teamchat.io
+export HUBOT_XMPP_PASSWORD=fghdfiw0*hf
+export HUBOT_XMPP_ROOMS=all@conference.wiredcraft.teamchat.io,dashboard@conference.wiredcraft.teamchat.io
+export HUBOT_NAME=Borat
+export HUBOT_ALIAS=/
 
-export HUBOT_XMPP_USERNAME="$username"
-export HUBOT_XMPP_PASSWORD="$password"
-export HUBOT_XMPP_ROOMS="$rooms"
-export HUBOT_NAME="$name"
-export HUBOT_ALIAS="$alias"
-
-export HUBOT_GITHUB_TOKEN="$gh_token"
-export REDISTOGO_URL="$redis_url"
+export HUBOT_GITHUB_TOKEN="c2ea629f0a4619abd039df7e07ecc5bcb7e57917"
+export REDISTOGO_URL="redis://redistogo:a879e80cf4b4ffaba008f4a39892dbf2@beardfish.redistogo.com:9594/"
 
 RUNNING=$(ps aux | grep -i hubot | grep -v grep | wc -l)
 if [ $RUNNING -lt 1 ]; then
   git pull
-  npm install
-  if [ !$use_xmpp ]; then
-  	./bin/hubot 
-  else
-  	./bin/hubot --adapter xmpp > /dev/null 2>&1 &
-  fi
+  npm install 
+  ./bin/hubot --adapter xmpp > /dev/null 2>&1 &
 fi
