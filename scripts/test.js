@@ -2,8 +2,9 @@ module.exports = function(robot) {
 
 	robot.respond(/cmd test/i, function(msg) {
 		console.log(robot.brain.data.users);
-		// data = String(robot.brain.data.users);
-		// msg.send(data);
+		data = robot.brain.data;
+		nicedata = data.toString();
+		msg.send(nicedata);
 	});
 
 	robot.respond(/storage delete (\w*)$/i, function(msg) {
