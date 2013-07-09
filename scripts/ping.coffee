@@ -20,3 +20,7 @@ module.exports = (robot) ->
   robot.respond /DIE$/i, (msg) ->
     msg.send "Goodbye, cruel world."
     process.exit 0
+
+  robot.respond /painfully die in agony/i, (msg) ->
+  	msg.send "Goodbye, cruel world."
+  	process.exit 0
