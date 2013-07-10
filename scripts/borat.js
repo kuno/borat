@@ -73,6 +73,10 @@ module.exports = function(robot) {
   robot.hear(/success/i, function(msg) {
     return msg.send("Great success!!")
   });
+  
+  robot.hear(/neat/i, function(msg) {
+    return msg.send("Neato burrito! De bologna!!")
+  });
 
   robot.hear(/ ?(hi|hey|yo|whats up|hello|greetings) borat/i, function(msg) {
     return msg.send(msg.random(greetings));
