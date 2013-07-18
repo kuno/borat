@@ -26,38 +26,64 @@ function makePass() {
   return x;
 }
 
+// Admin Check
+function isAdmin(user) {    
+    if (process.env.HUBOT_AUTH_ADMIN) {
+        admins = process.env.HUBOT_AUTH_ADMIN.split(',');
+    } else {
+        return false
+    }
+
+    for(i=0; i < admins.length; i++){
+        if(user === admins[i]) {
+            return true
+        }
+    }
+    return false
+}
+
 module.exports = function(robot) {
 
   // ADD USER TO JABBER
   robot.respond(/invite (.*)/i, function(msg) {
+    var admin = isAdmin(msg.message.user.id.toString());
     var user, pass;
     user = msg.match[1];
     pass = makePass();
 
-    child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + ' && sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
-      function(error, stdout, stderr) {
-        msg.send(stdout, stderr);
-        if (error !== null) {
-          msg.send('exec error: ' + error);
-        } else {
-          msg.send('Password is ' + pass + '')
+    if (admin === true) {
+      child = exec('sudo ejabberdctl register ' + user + ' wiredcraft.teamchat.io ' + pass + ' && sudo ejabberdctl srg_user_add ' + user + ' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io',
+        function(error, stdout, stderr) {
+          msg.send(stdout, stderr);
+          if (error !== null) {
+            msg.send('exec error: ' + error);
+          } else {
+            msg.send('Password is ' + pass + '')
+          }
         }
-      }
-    )
+      )
+    } else {
+      return msg.send('Only admins can invite new users.')
+    }
 
   });
 
 
   // REMOVE USER FROM JABBER
   robot.respond(/kick (.*)/i, function(msg) {
+    var admin = isAdmin(msg.message.user.id.toString());
     var user;
     kicking = true;
     user = msg.match[1];
 
-    msg.send('Kicking in 10 seconds. \n Type "/abort" or "borat abort" to cancel.');
-    
+    if (admin === true) {
+      msg.send('Kicking in 10 seconds. \n Type "/abort" or "borat abort" to cancel.');
+    } else {
+      return msg.send('Only admins can kick a user.')
+    }
+
     robot.respond(/abort/i, function(msg) {
-      if (kicking) {
+      if (kicking && admin) {
         msg.send('Kicking ' + user + ' aborted');
         abort = true;
       } else {
@@ -65,24 +91,26 @@ module.exports = function(robot) {
       }
     });
 
-    setTimeout(function() {
-      if (abort) {
-        abort = false;
-      } else {
-        msg.send('Kicking...');
-        child = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io && sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
-          function(error, stdout, stderr) {
-            msg.send(stdout, stderr);
-            if (error !== null) {
-              msg.send('exec error: ' + error);
-            } else {
-              msg.send('' + user + ' has been kicked.');
+    if (admin === true) {
+      setTimeout(function() {
+        if (abort) {
+          abort = false;
+        } else {
+          msg.send('Kicking...');
+          child = exec('sudo ejabberdctl srg_user_del ' + user +' wiredcraft.teamchat.io Wiredcraft wiredcraft.teamchat.io && sudo ejabberdctl unregister ' + user + ' wiredcraft.teamchat.io',
+            function(error, stdout, stderr) {
+              msg.send(stdout, stderr);
+              if (error !== null) {
+                msg.send('exec error: ' + error);
+              } else {
+                msg.send('' + user + ' has been kicked.');
+              }
             }
-          }
-        )
-      }
-      kicking = false;
-    }, 10000)
+          )
+        }
+        kicking = false;
+      }, 10000)
+    }
 
   });
 
