@@ -15,12 +15,14 @@ function isAdmin(user) {
 
 module.exports = function(robot) {
 
+    // Only admins can delete storage
     robot.respond(/storage delete (\w*)$/i, function(msg) {
-        if(isAdmin(msg.message.user.id.toString()) === true) {
+        admin = isAdmin(msg.message.user.id.toString());
+        if(admin === true) {
             delete robot.brain.data[msg.match[1]];
             return msg.send("" + msg.match[1] + " deleted from storage.");
         } else {
-            return msg.send("Sorry, that is an admin only command");
+            return msg.send("Admins only!");
         }
     });
     
@@ -30,7 +32,7 @@ module.exports = function(robot) {
         if(admin === true) {
             msg.send('You are indeed an admin.');
         } else {
-            msg.send('Sorry, you are not an admin.');
+            msg.send('You are not an admin.');
         }
     });
 
