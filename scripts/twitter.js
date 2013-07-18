@@ -38,8 +38,8 @@ false  //(optional) time in seconds in which file should be cached (only for get
 // }
 
 // Get tweets
-var getTweets = function(callback) {
-    twitter.get('search/tweets', '?q=wiredcraft', function(error, data) {
+var getTweets = function(term, callback) {
+    twitter.get('search/tweets', '?q=' + term, function(error, data) {
         var sData = JSON.parse(data).statuses;
         callback(sData);
     });
@@ -47,9 +47,10 @@ var getTweets = function(callback) {
 
 module.exports = function(robot) {
 
-    robot.respond(/get tweets/i, function(msg) {
+    robot.respond(/get tweets (.*)/i, function(msg) {
         var string = '';
-        getTweets(function(data) {
+        var term = msg.match[1];
+        getTweets(function(term, data) {
             for(i=0; i < data.length; i++) {
                 string += data[i].text;
                 string += '\n'
