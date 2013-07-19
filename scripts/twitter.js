@@ -72,7 +72,7 @@ module.exports = function(robot) {
         getTweets(term, function(data) {
             for(i=0; i < data.length; i++) {
                 string += data[i].user.name + ' - ' + data[i].text;
-                string += '\n'
+                string += '\n ----------- \n'
             };
             return msg.send(string);
         });
