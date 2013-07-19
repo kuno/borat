@@ -29,34 +29,57 @@ function isAdmin(user) {
     return false
 }
 
-// Defining variables and functions
+// Twitter
 var twitter = require('simple-twitter');
-twitter = new twitter(
-process.env.TWITTER_CONSUMER_KEY,
-process.env.TWITTER_CONSUMER_SECRET,
-process.env.TWITTER_ACCESS_TOKEN,
-process.env.TWITTER_ACCESS_TOKEN_SECRET,
+
+// @wiredcraft Twitter
+WCL = new twitter(
+process.env.WCL_CONSUMER_KEY,
+process.env.WCL_CONSUMER_SECRET,
+process.env.WCL_ACCESS_TOKEN,
+process.env.WCL_ACCESS_TOKEN_SECRET,
 false
 );
 
-// Get tweets
+// @devo_ps Twitter
+DEVOPS = new twitter(
+process.env.DEVOPS_CONSUMER_KEY,
+process.env.DEVOPS_CONSUMER_SECRET,
+process.env.DEVOPS_ACCESS_TOKEN,
+process.env.DEVOPS_ACCESS_TOKEN_SECRET,
+false
+);
+
+
+// Get tweets (uses @wiredcraft)
 var getTweets = function(term, callback) {
-    twitter.get('search/tweets', '?q=' + term, function(error, data) {
+    WCL.get('search/tweets', '?q=' + term, function(error, data) {
         var sData = JSON.parse(data).statuses;
         callback(sData);
     });
 };
 
 // New Tweet
-var newTweet = function(message, callback) {
-    twitter.post('statuses/update', {'status' : message}, function(error, data) {
-        sData = JSON.parse(data);
-        if (error) {
-            callback('Something went wrong ' + error);
-        } else {
-            callback('Success - ' + 'http://twitter.com/' + sData.user.screen_name); 
-        }
-    });  
+var newTweet = function(message, account, callback) {
+    if(account == 'devops'){
+        DEVOPS.post('statuses/update', {'status' : message}, function(error, data) {
+            sData = JSON.parse(data);
+            if (error) {
+                callback('Something went wrong ' + error);
+            } else {
+                callback('Success - ' + 'http://twitter.com/' + sData.user.screen_name); 
+            }
+        });
+    } else {
+        WCL.post('statuses/update', {'status' : message}, function(error, data) {
+            sData = JSON.parse(data);
+            if (error) {
+                callback('Something went wrong ' + error);
+            } else {
+                callback('Success - ' + 'http://twitter.com/' + sData.user.screen_name); 
+            }
+        });
+    }
 };
 
 
@@ -78,11 +101,12 @@ module.exports = function(robot) {
         });
     });
 
-    robot.respond(/tweet (.*)/i, function(msg) {
+    robot.respond(/(devops)? ?tweet (.*)/i, function(msg) {
         var admin = isAdmin(msg.message.user.id.toString());
-        var tweet = msg.match[1];
+        var tweet = msg.match[2];
+        var account = msg.match[1];
         if(admin === true) {
-            newTweet(tweet, function(data) {
+            newTweet(tweet, account, function(data) {
                 return msg.send(data);
             });
         } else {
