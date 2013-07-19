@@ -13,10 +13,17 @@ export HUBOT_AUTH_ADMIN=hunvreus,zbal,quentinberder,Makara
 export HUBOT_GITHUB_TOKEN="c2ea629f0a4619abd039df7e07ecc5bcb7e57917"
 export REDISTOGO_URL="redis://redistogo:a879e80cf4b4ffaba008f4a39892dbf2@beardfish.redistogo.com:9594/"
 
-# export TWITTER_CONSUMER_KEY=""
-# export TWITTER_CONSUMER_SECRET=""
-# export TWITTER_ACCESS_TOKEN=""
-# export TWITTER_ACCESS_TOKEN_SECRET=""
+# @wiredcraft Twitter #
+# export WCL_CONSUMER_KEY=""
+# export WCL_CONSUMER_SECRET=""
+# export WCL_ACCESS_TOKEN=""
+# export WCL_ACCESS_TOKEN_SECRET=""
+
+# @devo_ps Twitter #
+# export DEVOPS_CONSUMER_KEY=""
+# export DEVOPS_CONSUMER_SECRET=""
+# export DEVOPS_ACCESS_TOKEN=""
+# export DEVOPS_ACCESS_TOKEN_SECRET=""
 
 RUNNING=$(ps aux | grep -i hubot | grep -v grep | wc -l)
 if [ $RUNNING -lt 1 ]; then
