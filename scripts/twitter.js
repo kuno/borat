@@ -65,7 +65,10 @@ module.exports = function(robot) {
 
     robot.respond(/get tweets (.*)/i, function(msg) {
         var string = '';
-        var term = msg.match[1];
+        var str = msg.match[1];
+        var term = str.replace(/@/g, '%40')
+                      .replace(/ /g, '%20')
+                      .replace(/#/g, '%23');
         getTweets(term, function(data) {
             for(i=0; i < data.length; i++) {
                 string += data[i].text;
@@ -83,7 +86,7 @@ module.exports = function(robot) {
                 return msg.send(data);
             });
         } else {
-            return msg.send('Only admins can post tweets.')
+            return msg.send('Only admins can post tweets.');
         };
     });
 
