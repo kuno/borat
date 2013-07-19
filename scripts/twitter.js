@@ -8,7 +8,7 @@
 //   None
 //
 // Commands:
-//   hubot get tweets - Gets tweets mentioning "wiredcraft"
+//   hubot get tweets <search term> - Gets tweets
 //
 // Author:
 //   Jamesford
@@ -71,7 +71,7 @@ module.exports = function(robot) {
                       .replace(/#/g, '%23');
         getTweets(term, function(data) {
             for(i=0; i < data.length; i++) {
-                string += data[i].text;
+                string += data[i].user.name + ' - ' + data[i].text;
                 string += '\n'
             };
             return msg.send(string);
