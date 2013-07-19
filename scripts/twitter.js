@@ -9,6 +9,8 @@
 //
 // Commands:
 //   hubot get tweets <search term> - Gets tweets
+//   hubot tweet <message> - Post tweet to @wiredcraft
+//   hubot devops tweet <message> - Post tweet to @devo_ps
 //
 // Author:
 //   Jamesford
