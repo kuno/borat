@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source /etc/profile
-cd /opt/borat
+# source /etc/profile
+# cd /opt/borat
 
 export HUBOT_XMPP_USERNAME=borat@wiredcraft.teamchat.io
 export HUBOT_XMPP_PASSWORD=fghdfiw0*hf
@@ -13,14 +13,16 @@ export HUBOT_AUTH_ADMIN=hunvreus,zbal,quentinberder,Makara
 export HUBOT_GITHUB_TOKEN="c2ea629f0a4619abd039df7e07ecc5bcb7e57917"
 export REDISTOGO_URL="redis://redistogo:a879e80cf4b4ffaba008f4a39892dbf2@beardfish.redistogo.com:9594/"
 
-# export TWITTER_CONSUMER_KEY="FILL ME IN!"
-# export TWITTER_CONSUMER_SECRET="FILL ME IN!"
-# export TWITTER_ACCESS_TOKEN="FILL ME IN!"
-# export TWITTER_ACCESS_TOKEN_SECRET="FILL ME IN!"
+export TWITTER_CONSUMER_KEY="Y4bWASXPKdSAb5Xahgi0A"
+export TWITTER_CONSUMER_SECRET="JRSGcHp3jOaIMceZabaWxB5xiPaCGONIooi5dgbUpJ4"
+export TWITTER_ACCESS_TOKEN="1252639880-QGUiD98uUIgOeFB9TlhmpDPOobhj3dNPly2VcNE"
+export TWITTER_ACCESS_TOKEN_SECRET="GfmmGRxeUinOlS3DPQOyRFelQKCvK83VQz7TWAINU"
 
-RUNNING=$(ps aux | grep -i hubot | grep -v grep | wc -l)
-if [ $RUNNING -lt 1 ]; then
-  git pull
-  npm install 
-  ./bin/hubot --adapter xmpp > /dev/null 2>&1 &
-fi
+# RUNNING=$(ps aux | grep -i hubot | grep -v grep | wc -l)
+# if [ $RUNNING -lt 1 ]; then
+#   git pull
+#   npm install 
+#   ./bin/hubot --adapter xmpp > /dev/null 2>&1 &
+# fi
+
+./bin/hubot
