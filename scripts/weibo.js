@@ -8,7 +8,8 @@
 //   None
 //
 // Commands:
-//   hubot something - does something
+//   hubot get weibos <amount> - fetch x amount of weibo posts
+//   hubot post weibo <message> - post a message to weibo 
 //
 // Author:
 //   Jamesford
