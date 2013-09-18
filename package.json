@@ -32,7 +32,8 @@
     "scraper": "0.0.9",
     "githubot": "0.4.0",
     "redis": "0.7.2",
-    "simple-twitter": "1.0.3"
+    "simple-twitter": "1.0.3",
+    "node-sina-weibo": "*"
   },
 
   "engines": {
