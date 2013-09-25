@@ -82,7 +82,7 @@ module.exports = function(robot) {
         message.toString();
         if(admin === true) {
             newWeibo(message, function(data) {
-                return msg.send('Created at: '+data.created_at);
+                return msg.send('Post created: '+data.created_at);
             });
         } else {
             return msg.send('Only admins can post weibos.');
