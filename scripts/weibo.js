@@ -22,7 +22,7 @@ function isAdmin(user) {
         return false
     }
 
-    for(i=0; i < admins.length; i++){
+    for(i=0; i < admins.length; i++) {
         if(user === admins[i]) {
             return true
         }
@@ -30,10 +30,13 @@ function isAdmin(user) {
     return false
 }
 
+// Require node-sina-weibo
+var SinaWeibo = require('node-sina-weibo');
+
 // Environment variables
-var clientId = process.env.WEIBO_CLIENT_ID;
-var clientSecret = process.env.WEIBO_CLIENT_SECRET;
-var accessToken = process.env.WEIBO_ACCESS_TOKEN;
+var clientId = "3993654974";
+var clientSecret = "0858634a81dde165396113b127fbdd71";
+var accessToken = "2.00TJX2JCuFyQ3E87d905cd46058uTR";
 
 // Init Weibo
 var weibo = new SinaWeibo(clientId, clientSecret, accessToken);
@@ -42,27 +45,32 @@ var weibo = new SinaWeibo(clientId, clientSecret, accessToken);
 var getWeibos = function(amount, callback) {
     weibo.GET('statuses/friends_timeline', {count: amount}, function(err, response, data) {
         if(err) { return callback(err) };
-        callback(data);
+        callback(response.statuses);
     });
 };
 
 var newWeibo = function(message, callback) {
     weibo.POST('statuses/update', {status: message}, function(err, response, data) {
         if(err) { return callback(err) };
-        callback(data);
+        callback(response);
     });
 };
 
 module.exports = function(robot) {
 
-    robot.respond(/get weibos (.*)/i, function(msg) {
+    robot.respond(/get weibos ?(.*)/i, function(msg) {
         var messages = '';
         var count = msg.match[1];
         count = parseInt(count);
+        if(isNaN(count)) {
+            count = 5;
+        };
         getWeibos(count, function(data) {
             for(i = 0; i < data.length; i++) {
                 messages += data[i].user.name + ' - ' + data[i].text;
-                messages += '\n ----------- \n'
+                if(i < data.length - 1) {
+                    messages += '\n ----------- \n';
+                }
             };
             return msg.send(messages);
         });
